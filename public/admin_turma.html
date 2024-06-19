@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Admin</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <main class="d-flex flex-nowrap">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; height: 100vh;">
+            <a href="/"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img src="/images/li_icon.png" style="width: 32px;" alt="" class="me-2">
+                <span class="fs-4" id="sid_user_nome"></span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link active" aria-current="page">
+                        <i class="fas fa-code me-2"></i>
+                        Turmas
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin_desafios" class="nav-link link-body-emphasis">
+                        <i class="fas fa-code me-2"></i>
+                        Meus Desafios
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/images/user.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong></strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow">
+                    <li><a class="dropdown-item" href="#" id="logout">Desconectar</a></li>
+                </ul>
+            </div>
+        </div>
+        <content class="d-flex flex-column p-3"
+            style="width: calc(100vw - 280px); height: 100vh; background: linear-gradient(180deg, #7ED957 0%, #43732E 100%); overflow: scroll;">
+            <div class="card">
+                <div class="card-body">
+                    <p class="text-center h1 fw-bolder mb-0 mt-4"><a href="/admin" class="float-start text-reset text-decoration-none"><i class="fas fa-arrow-left-long"  style="position: absolute;"></i></a> MINHAS</p>
+                    <p class="text-center h1 fw-bolder mb-4"><span style="background: #D5F1C9;color: #00BF63;" class="px-3">TURMAS!</span></p>
+                    <div class="row px-4" id="list-area">
+                    
+                    </div>
+                    <div class="px-4">
+                        <div class="row">
+                            <div class="col-10">
+                                <select name="new_aluno" id="new_aluno" class="form-control">
+                                    <option value="0" disabled selected>Selecione um aluno</option>
+    
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-success w-100" id="add_aluno" onclick="enturmar()">Enturmar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row px-4" id="list-area2">
+
+                    </div>
+                </div>
+            </div>
+        </content>
+    </main>
+
+    <script>
+        document.getElementById('logout').addEventListener('click', function () {
+            localStorage.removeItem('authToken');
+            window.location.href = '/';
+        });
+
+        // Verificar se o usuário está autenticado
+        if (!localStorage.getItem('authToken')) {
+            window.location.href = '/';
+        }
+
+        function enturmar() {
+            $.post('/enturmar', { 'aluno': $('#new_aluno').val(), 'turma': windowID }, function (response6) {
+                if (response6.success) {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function desenturmar(id) {
+            $.post(`/desenturmar/${id}`, function (response7) {
+                if (response7.success) {
+                    window.location.reload();
+                }
+            });
+        }
+
+        // Carregar mensagens dos usuários e respostas dos desafios
+        $(document).ready(function () {
+            document.querySelector('#sid_user_nome').textContent = JSON.parse(localStorage.userInfo).nome;
+            $.post(`/minhasturmas`, { id_usuario: localStorage.userId }, function (data) {
+                windowID = window.location.pathname.split('/').pop();
+                data.respostas.forEach(turma => {
+                    if(turma.id == windowID) {
+                        $('#list-area').append(`
+                            <div class="col-12 my-2">
+                                <div class="p-2 rounded" style="background-color: #EFEFFD;">
+                                    <p class="text-center mt-4 h4 mb-0">TURMA ${turma.id} </p>
+                                    <p class="text-center mt-1 mb-4 h4 text-primary">${turma.nome}</p>
+                                </div>
+                            </div>
+                        `)
+                    }
+                });
+            });
+            $.post(`#`, function(response4){
+                response4.turma.forEach(aluno => {
+                    $('#list-area2').append(`
+                            <div class="col-12 my-2">
+                                <div class="p-2 rounded" style="background-color: #EFEFFD;">
+                                    <p class="text-center mt-4 h4 mb-0">ALUNO ${aluno.nome} <a href='#' onclick='desenturmar(${aluno.id})' class='btn btn-sm btn-danger'>Desenturmar</a></p>
+                                    <p class="text-center mt-1 mb-4 h4 text-primary">${aluno.email} - ${aluno.telefone}</p>
+                                </div>
+                            </div>
+                        `)
+                });
+            });
+            windowID = window.location.pathname.split('/').pop();
+            $.post('/alunosnaoenturmados', { 'turma': windowID }, function(response5){
+                $('#new_aluno').empty();
+                $('#new_aluno').append(`
+                    <option value="0" disabled selected>Selecione um aluno</option>
+                `);
+                response5.respostas.forEach(aluno => {
+                    $('#new_aluno').append(`
+                        <option value="${aluno.id}">${aluno.nome}</option>
+                    `);
+                });
+            });
+            
+
+            // $.ajax({
+            //     url: '/get-messages',
+            //     type: 'GET',
+            //     headers: {
+            //         'Authorization': localStorage.getItem('authToken')
+            //     },
+            //     success: function (response) {
+            //         if (response.success) {
+            //             const userMessages = $('#userMessages');
+            //             const userChallenges = $('#userChallenges');
+            //             const intermediateChallenges = $('#intermediateChallenges');
+
+            //             response.users.forEach(function (user) {
+            //                 if (user.messages.length > 0) {
+            //                     const userMessageItem = $('<li><strong>' + user.name + ' (' + user.email + '):</strong><ul></ul></li>');
+            //                     user.messages.forEach(function (message) {
+            //                         userMessageItem.find('ul').append('<li>' + message.replace(/\n/g, '<br>') + '</li>');
+            //                     });
+            //                     userMessages.append(userMessageItem);
+            //                 }
+
+            //                 if (user.challenges.length > 0) {
+            //                     const userChallengeItem = $('<li><strong>' + user.name + ' (' + user.email + '):</strong><ul></ul></li>');
+            //                     user.challenges.forEach(function (challenge) {
+            //                         userChallengeItem.find('ul').append('<li>Desafio 1: ' + challenge.challenge1.replace(/\n/g, '<br>') + '</li>');
+            //                         userChallengeItem.find('ul').append('<li>Desafio 2: ' + challenge.challenge2.replace(/\n/g, '<br>') + '</li>');
+            //                     });
+            //                     userChallenges.append(userChallengeItem);
+            //                 }
+
+            //                 if (user.intermediateChallenges.length > 0) {
+            //                     const userIntermediateChallengeItem = $('<li><strong>' + user.name + ' (' + user.email + '):</strong><ul></ul></li>');
+            //                     user.intermediateChallenges.forEach(function (intermediateChallenge) {
+            //                         userIntermediateChallengeItem.find('ul').append('<li>Desafio 1: ' + intermediateChallenge.challenge1.replace(/\n/g, '<br>') + '</li>');
+            //                         userIntermediateChallengeItem.find('ul').append('<li>Desafio 2: ' + intermediateChallenge.challenge2.replace(/\n/g, '<br>') + '</li>');
+            //                     });
+            //                     intermediateChallenges.append(userIntermediateChallengeItem);
+            //                 }
+            //             });
+            //         } else {
+            //             console.error('Erro ao carregar mensagens e desafios');
+            //         }
+            //     },
+            //     error: function (jqXHR, textStatus, errorThrown) {
+            //         console.error('Erro ao carregar mensagens e desafios: ' + textStatus, errorThrown);
+            //     }
+            // });
+        });
+    </script>
+</body>
+
+</html>

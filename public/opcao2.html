@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Poppins:wght@400;500;700&family=Roboto&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
+        integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>CodeQuest | Desafio - Intermediário</title>
+    <style>
+        .super-number {
+            font-size: xxx-large;
+            padding: 20px 10px 20px 22px;
+            background: #00BF63;
+            border-radius: 40% 51% 30% 40%;
+        }
+
+        #list-area li {
+            --bs-list-group-border-color: #00BF63;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* height: 100vh; */
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            /* Cor do texto */
+        }
+
+        /* .container {
+            max-width: 80vh;
+            width: 100%;
+            padding: 20px;
+            background-color: #00bf63;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        } */
+
+        /* .cards-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        } */
+
+        /* .card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(25% - 20px);
+            margin-bottom: 20px;
+            text-align: center;
+        } */
+
+        /* .card img {
+            width: 70px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        } */
+
+        .card-title {
+            color: #161A49;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .card:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+        #logout {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header class="d-flex justify-content-center py-1 text-bg-dark w-100 rounded my-3 ">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/escolhas" class=" text-light nav-link"><i class="fas fa-home"></i></a></li>
+                <li class="nav-item"><a href="/turmas" class=" text-light nav-link">Turmas</a></li>
+                <li class="nav-item"><a href="/solucoes" class=" text-light nav-link">Minhas Soluções</a></li>
+                <li class="nav-item"><a href="/sac" class=" text-light nav-link">SAC</a></li>
+                <li class="nav-item"><a href="/perfil" class=" text-light nav-link"><img src="/images/user.jpg" alt=""
+                            class="rounded-circle" style="width: 24px;"></a></li>
+            </ul>
+        </header>
+    </div>
+    <h1 class="pt-4 text-center w-100"><a href="/escolhas" class="float-start ps-4 text-reset text-decoration-none"><i class="fas fa-arrow-left-long">   </i></a>Bom estudo!</h1>
+    <div class="container bg-success p-4 rounded" style="background-color: #00BF63 !important;">
+        <div class="container bg-light rounded p-2" style="background-color: white !important;">
+            <div class="text-center">
+                <img src="/images/intermediario.png" alt="" style="width: 100px;">
+                <p class="text-center fw-bold">INTERMEDIÁRIO</p>
+                <p class="text-center">Programadores intermediários compreendem bem os conceitos fundamentais, criam soluções complexas e trabalham de forma autônoma em projetos, dominando uma ou mais linguagens de programação.</p>
+            </div>
+        </div>
+    </div>
+    <div style="height:50px">&nbsp;</div>
+    <div class="container-fluid">
+        <p class="text-center h1 fw-bolder mb-0">DESAFIO PARA</p>
+        <p class="text-center h1 fw-bolder mb-4"><span style="background: #D5F1C9;color: #00BF63;text-transform: uppercase;" class="px-3">Intermediários!</span></p>
+        
+    </div>
+    <div class="container">
+        <div class="p-4 my-4" style="background:#EFEFFD;border-radius:32px" onclick="window.location.href='/desafio/2_1'">
+            <div class="row">
+                <div class="col-3 col-md-1">
+                    <img src="/images/desafio2.png" alt="" class="w-100">
+                </div>
+                <div class="col-9 col-md-11">
+                    <p>Desafio: Criar uma classe ContaBancaria com os atributos titular, saldo e numero_conta, e adicionar métodos depositar(valor), sacar(valor) e ver_saldo(). Crie uma classe ContaPoupanca que herda de ContaBancaria e adicione um método render_juros(taxa). Implemente um método transferir(valor, conta_destino) na classe ContaBancaria.</p>
+                    <p class="fw-bolder mb-0">João Silva</p>
+                    <p class="text-primary">Professor de Programação Orientada a Objetos</p>
+                </div>
+            </div>
+        </div>
+        <div class="p-4 my-4" style="background:#EFEFFD;border-radius:32px" onclick="window.location.href='/desafio/2_2'">
+            <div class="row">
+                <div class="col-3 col-md-1">
+                    <img src="/images/prof2.png" alt="" class="w-100">
+                </div>
+                <div class="col-9 col-md-11">
+                    <p>Desafio: Criar uma página HTML com um formulário de contato que inclua campos para nome, email e mensagem. Use CSS para estilizar o formulário, tornando-o responsivo, e use JavaScript para validar os campos do formulário antes de enviar, garantindo que todos os campos estejam preenchidos e que o email seja válido.</p>
+                    <p class="fw-bolder mb-0">Marcelo Mathias</p>
+                    <p class="text-primary">Professor de Desenvolvimento Web</p>
+                </div>
+            </div>
+        </div>
+        <div class="p-4 my-4" style="background:#EFEFFD;border-radius:32px" onclick="window.location.href='/desafio/2_3'">
+            <div class="row">
+                <div class="col-3 col-md-1">
+                    <img src="/images/prof3.png" alt="" class="w-100">
+                </div>
+                <div class="col-9 col-md-11">
+                    <p>Desafio: Implementar uma fila (queue) usando uma lista. Você deve criar métodos para adicionar um item à fila (enqueue), remover o item da frente da fila (dequeue), verificar o item na frente sem removê-lo (front), verificar se a fila está vazia (is_empty) e verificar o tamanho da fila (size).</p>
+                    <p class="fw-bolder mb-0">Valter Souza</p>
+                    <p class="text-primary">Professor Estrutura de Dados</p>
+                </div>
+            </div>
+        </div>
+        <div class="p-4 my-4" style="background:#EFEFFD;border-radius:32px" onclick="window.location.href='/desafio/2_4'">
+            <div class="row">
+                <div class="col-3 col-md-1">
+                    <img src="/images/mulher.png" alt="" class="w-100">
+                </div>
+                <div class="col-9 col-md-11">
+                    <p>Desafio: Criar um banco de dados chamado Biblioteca, tabelas Livros (com id, titulo, autor, ano_publicacao) e Usuarios (com id, nome, email), e uma tabela Emprestimos com as colunas id, usuario_id, livro_id, data_emprestimo e data_devolucao. Insira registros em todas as tabelas, realize uma consulta que mostre todos os livros emprestados por um determinado usuário, atualize a data de devolução de um empréstimo e delete um registro de empréstimo específico.</p>
+                    <p class="fw-bolder mb-0">Rebeca Costa</p>
+                    <p class="text-primary">Professora de Banco de Dados</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" id="logout" class="d-none">Logout</a>
+
+    <script>
+        document.getElementById('logout').addEventListener('click', function () {
+            localStorage.removeItem('authToken');
+            window.location.href = '/';
+        });
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            responsive: {
+                0: {
+                    items: 1
+                },
+            }
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Admin</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <main class="d-flex flex-nowrap">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; height: 100vh;">
+            <a href="/"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img src="/images/li_icon.png" style="width: 32px;" alt="" class="me-2">
+                <span class="fs-4" id="sid_user_nome"></span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link text-reset" aria-current="page">
+                        <i class="fas fa-code me-2"></i>
+                        Turmas
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin_desafios" class="nav-link active">
+                        <i class="fas fa-code me-2"></i>
+                        Meus Desafios
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/images/user.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong></strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow">
+                    <li><a class="dropdown-item" href="#" id="logout">Desconectar</a></li>
+                </ul>
+            </div>
+        </div>
+        <content class="d-flex flex-column p-3"
+            style="width: calc(100vw - 280px); height: 100vh; background: linear-gradient(180deg, #7ED957 0%, #43732E 100%); overflow: scroll;">
+            <div class="card">
+                <div class="card-body">
+                    <p class="text-center h1 fw-bolder mb-0 mt-4">MEUS</p>
+                    <p class="text-center h1 fw-bolder mb-4"><span style="background: #D5F1C9;color: #00BF63;"
+                            class="px-3">DESAFIOS!</span></p>
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="number" name="numero" id="new_numero" class="form-control" placeholder="Número do Desafio">
+                        </div>
+                        <div class="col-4 mt-2 text-center fw-bold">Novo Desafio</div>
+                        <div class="col-2">
+                            <select name="dificuldade" id="new_dificuldade" class="form-control">
+                                <option value="" disabled="disabled" selected="selected">Dificuldade</option>
+                                <option value="0">Iniciante</option>
+                                <option value="1">Junior</option>
+                                <option value="2">Intermediário</option>
+                                <option value="3">Avançado</option>
+                            </select>    
+                        </div>
+                        <div class="col-2">
+                            <a href="#" onclick="salvarNovoDesafio()" class="btn btn-success w-100">Salvar</a>
+                        </div>
+                        <div class="col-12 my-2">
+                            <textarea name="texto" id="new_texto" class="form-control" placeholder="Texto do Desafio" style="resize: vertical;"></textarea>
+                        </div>
+                    </div>
+                    <div class="row px-4" id="list-area">
+
+                    </div>
+                </div>
+            </div>
+        </content>
+    </main>
+
+    <script>
+        document.getElementById('logout').addEventListener('click', function () {
+            localStorage.removeItem('authToken');
+            window.location.href = '/';
+        });
+
+        // Verificar se o usuário está autenticado
+        if (!localStorage.getItem('authToken')) {
+            window.location.href = '/';
+        }
+        function salvarNovoDesafio() {
+            $.post('/salvarNovoDesafio', {
+                numero: document.getElementById('new_numero').value,
+                dificuldade: document.getElementById('new_dificuldade').value,
+                texto: document.getElementById('new_texto').value,
+                id_usuario: localStorage.userId
+            }, function(response3){
+                $("#new_numero").val('')
+                $("#new_dificuldade").val('')
+                $("#new_texto").val('')
+                alert('Desafio salvo com sucesso!');
+                window.location.reload()
+            })
+        }
+        // Carregar mensagens dos usuários e respostas dos desafios
+        $(document).ready(function () {
+            document.querySelector('#sid_user_nome').textContent = JSON.parse(localStorage.userInfo).nome;
+            $.post(`/meusdesafios`, { id_usuario: localStorage.userId }, function (data) {
+                data.respostas.forEach(turma => {
+                    $('#list-area').append(`
+                    <div class="p-4 my-4" style="background:#EFEFFD;border-radius:32px" >
+                        <div class="row">
+                            <div class="col-3 col-md-1">
+                                <img src="${turma.img}" alt="" class="w-100">
+                            </div>
+                            <div class="col-9 col-md-11">
+                                <p class="mt-4 h4 mb-0">DESAFIO ${turma.numero} - ${turma.dificuldade}</p>
+                                <p><a href='/admin_desafio/${turma.id}' class='btn btn-sm btn-success'>Ver respostas</a></p>
+                                <p>Desafio: ${turma.texto}</p>
+                            </div>
+                        </div>
+                    </div>
+                `)
+                });
+            });
+
+            // $.ajax({
+            //     url: '/get-messages',
+            //     type: 'GET',
+            //     headers: {
+            //         'Authorization': localStorage.getItem('authToken')
+            //     },
+            //     success: function (response) {
+            //         if (response.success) {
+            //             const userMessages = $('#userMessages');
+            //             const userChallenges = $('#userChallenges');
+            //             const intermediateChallenges = $('#intermediateChallenges');
+
+            //             response.users.forEach(function (user) {
+            //                 if (user.messages.length > 0) {
+            //                     const userMessageItem = $('<li><strong>' + user.name + ' (' + user.email + '):</strong><ul></ul></li>');
+            //                     user.messages.forEach(function (message) {
+            //                         userMessageItem.find('ul').append('<li>' + message.replace(/\n/g, '<br>') + '</li>');
+            //                     });
+            //                     userMessages.append(userMessageItem);
+            //                 }
+
+            //                 if (user.challenges.length > 0) {
+            //                     const userChallengeItem = $('<li><strong>' + user.name + ' (' + user.email + '):</strong><ul></ul></li>');
+            //                     user.challenges.forEach(function (challenge) {
+            //                         userChallengeItem.find('ul').append('<li>Desafio 1: ' + challenge.challenge1.replace(/\n/g, '<br>') + '</li>');
+            //                         userChallengeItem.find('ul').append('<li>Desafio 2: ' + challenge.challenge2.replace(/\n/g, '<br>') + '</li>');
+            //                     });
+            //                     userChallenges.append(userChallengeItem);
+            //                 }
+
+            //                 if (user.intermediateChallenges.length > 0) {
+            //                     const userIntermediateChallengeItem = $('<li><strong>' + user.name + ' (' + user.email + '):</strong><ul></ul></li>');
+            //                     user.intermediateChallenges.forEach(function (intermediateChallenge) {
+            //                         userIntermediateChallengeItem.find('ul').append('<li>Desafio 1: ' + intermediateChallenge.challenge1.replace(/\n/g, '<br>') + '</li>');
+            //                         userIntermediateChallengeItem.find('ul').append('<li>Desafio 2: ' + intermediateChallenge.challenge2.replace(/\n/g, '<br>') + '</li>');
+            //                     });
+            //                     intermediateChallenges.append(userIntermediateChallengeItem);
+            //                 }
+            //             });
+            //         } else {
+            //             console.error('Erro ao carregar mensagens e desafios');
+            //         }
+            //     },
+            //     error: function (jqXHR, textStatus, errorThrown) {
+            //         console.error('Erro ao carregar mensagens e desafios: ' + textStatus, errorThrown);
+            //     }
+            // });
+        });
+    </script>
+</body>
+
+</html>

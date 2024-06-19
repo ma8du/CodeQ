@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <section>
+        <div class="green">
+            <center>
+                <h1>BEM VINDO AO CODEQUEST</h1>
+                <p>Desenvolva suas habilidade de programação por meio de desafios</p>
+            </center>
+        </div>
+        <div class="login-form">
+            <center><h2>Login</h2></center>
+            <form id="loginForm">
+                <input type="email" name="email" placeholder="E-mail" id="email" required>
+                <input type="password" name="password" placeholder="Senha" id="password" required>
+                <center><button type="submit" class="login-button">Login</button></center>
+            </form>
+            <center><p id="error-message" style="color: red;"></p></center>
+            <center><button id="registerButton" class="signup-button">Registrar</button></center>
+        </div>
+
+    </section>
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').submit(function (event) {
+                event.preventDefault();
+
+                var email = $('input[name="email"]').val();
+                var password = $('input[name="password"]').val();
+
+                $.ajax({
+                    url: '/receber',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ email: email, password: password }),
+                    success: function (response) {
+                        console.log('Dados enviados com sucesso:', response);
+                        if (response.success) {
+                            localStorage.authToken = response.userInfo.password;
+                            localStorage.userId = response.userInfo.id;
+                            localStorage.userInfo = JSON.stringify(response.userInfo);
+                            window.location.href = response.redirectUrl;
+                        } else {
+                            $('#error-message').text('Credenciais inválidas. Tente novamente.');
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $('#error-message').text('Erro ao enviar dados: ' + jqXHR.responseJSON.message);
+                    }
+                });
+            });
+
+            $('#registerButton').click(function () {
+                window.location.href = '/register';
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/coding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Poppins:wght@400;500;700&family=Roboto&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
+        integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>CodeQuest | Perfil</title>
+    <style>
+        .super-number {
+            font-size: xxx-large;
+            padding: 20px 10px 20px 30px;
+            background: #00BF63;
+            border-radius: 40% 51% 30% 40%;
+        }
+
+
+        #list-area li {
+            --bs-list-group-border-color: #00BF63;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* height: 100vh; */
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            /* Cor do texto */
+        }
+
+        /* .container {
+            max-width: 80vh;
+            width: 100%;
+            padding: 20px;
+            background-color: #00bf63;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        } */
+
+        /* .cards-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        } */
+
+        /* .card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(25% - 20px);
+            margin-bottom: 20px;
+            text-align: center;
+        } */
+
+        /* .card img {
+            width: 70px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        } */
+
+        .card-title {
+            color: #161A49;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .card:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+        #logout {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header class="d-flex justify-content-center py-1 text-bg-dark w-100 rounded my-3 ">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/escolhas" class=" text-light nav-link"><i class="fas fa-home"></i></a></li>
+                <li class="nav-item"><a href="/turmas" class=" text-light nav-link">Turmas</a></li>
+                <li class="nav-item"><a href="/solucoes" class=" text-light nav-link">Minhas Soluções</a></li>
+                <li class="nav-item"><a href="/sac" class=" text-light nav-link">SAC</a></li>
+                <li class="nav-item"><a href="/perfil" class=" text-light nav-link"><img src="/images/user.jpg" alt=""
+                            class="rounded-circle" style="width: 24px;"></a></li>
+            </ul>
+        </header>
+    </div>
+    <p class="text-center h1 fw-bolder mb-0 mt-4">MEU</p>
+    <p class="text-center h1 fw-bolder mb-4"><span style="background: #D5F1C9;color: #00BF63;" class="px-3">PERFIL!</span></p>
+    <div style="height:20px">&nbsp;</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8 px-4">
+                <ul class="list-group list-group-flush" id="list-area">
+                    <li class="list-group-item fw-bold" style="background: transparent;"><img src="/images/li_icon.png" class="rounded-circle pe-2" alt="">Nome: <span id="user_nome" class="fw-normal"></span> <input type="text" class="form-control" name="user_nome" id="e_user_nome" style="display:none"></li>
+                    <li class="list-group-item fw-bold" style="background: transparent;"><img src="/images/li_icon.png" class="rounded-circle pe-2" alt="">Email: <span id="user_email" class="fw-normal"></span> <input type="text" class="form-control" name="user_email" id="e_user_email" style="display:none"></li>
+                    <li class="list-group-item fw-bold" style="background: transparent;"><img src="/images/li_icon.png" class="rounded-circle pe-2" alt="">Instituição: <span id="user_inst" class="fw-normal"></span> <input type="text" class="form-control" name="user_inst" id="e_user_inst" style="display:none"></li>
+                    <li class="list-group-item fw-bold" style="background: transparent;"><img src="/images/li_icon.png" class="rounded-circle pe-2" alt="">Telefone: <span id="user_telefone" class="fw-normal"></span> <input type="text" class="form-control" name="user_telefone" id="e_user_telefone" style="display:none"></li>
+                    <li class="list-group-item fw-bold" style="background: transparent; text-align: center;"><button type="button" id="e_btn" class="btn btn-success" onclick="LiberarEditar()">Editar</button> <a href="#" id="logout" class="ps-2 btn btn-danger">Desconectar</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-4">
+                <img src="/images/layout1.png" alt="" class="w-100">
+            </div>
+        </div>
+    </div>
+
+    <div style="height:20px">&nbsp;</div>
+    
+
+    <script>
+
+        document.getElementById('logout').addEventListener('click', function () {
+            localStorage.removeItem('authToken');
+            window.location.href = '/';
+        });
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            responsive: {
+                0: {
+                    items: 1
+                },
+            }
+        });
+        // $("#user_email").text(localStorage.userId);
+        $.post('#', {
+            id: localStorage.userId
+        }, function (data) {
+            $("#user_nome").text(data.userInfo.nome);
+            $("#user_email").text(data.userInfo.email);
+            $("#user_inst").text(data.userInfo.instituicao);
+            $("#user_telefone").text(data.userInfo.telefone);
+            $("#e_user_nome").val(data.userInfo.nome);
+            $("#e_user_email").val(data.userInfo.email);
+            $("#e_user_inst").val(data.userInfo.instituicao);
+            $("#e_user_telefone").val(data.userInfo.telefone);
+        }, 'json');
+
+        function LiberarEditar() {
+            $("#user_nome").hide();
+            $("#user_inst").hide();
+            $("#user_telefone").hide();
+            $("#e_user_nome").show();
+            $("#e_user_inst").show();
+            $("#e_user_telefone").show();
+            $("#e_btn").attr('onclick', 'SalvarEdicao()');
+        }
+        
+        function SalvarEdicao() {
+            $.post('/salvarPerfil', {
+                id: localStorage.userId,
+                nome: $("#e_user_nome").val(),
+                instituicao: $("#e_user_inst").val(),
+                telefone: $("#e_user_telefone").val()
+            }, function (data) {
+                $("#user_nome").text(data.userInfo.nome);
+                $("#user_email").text(data.userInfo.email);
+                $("#user_inst").text(data.userInfo.instituicao);
+                $("#user_telefone").text(data.userInfo.telefone);
+                $("#user_nome").show();
+                $("#user_inst").show();
+                $("#user_telefone").show();
+                $("#e_user_nome").hide();
+                $("#e_user_inst").hide();
+                $("#e_user_telefone").hide();
+                $("#e_btn").attr('onclick', 'LiberarEditar()');
+            }, 'json');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

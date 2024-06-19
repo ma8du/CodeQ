@@ -1,0 +1,22 @@
+textarea.codingarea {
+    width: 100%;
+    background: black;
+    color: #7ED957;
+    min-height: 80vh;
+    margin-bottom: 20px;
+    padding: 2px 5px;
+    border: 0px solid transparent;
+    font-family: Consolas;
+    resize: none;
+}
+
+div.codingarea {
+    background: lightgrey;
+    color: black;
+    min-height: 200px;
+    margin-bottom: 20px;
+    padding: 2px 5px;
+    border: 0px solid transparent;
+    font-family: Consolas;
+    resize: none;
+}

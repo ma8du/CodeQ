@@ -1,0 +1,93 @@
+/* Estilos gerais */
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #555;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.challenge {
+  margin-bottom: 20px;
+}
+
+label {
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: 500;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+
+button {
+  padding: 12px;
+  background-color: #00bf63;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+  background-color: #009f53;
+}
+
+#logout {
+  display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #00bf63;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.logout-button:hover {
+  background-color: #c9302c;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  textarea {
+    height: 80px;
+  }
+}

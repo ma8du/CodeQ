@@ -1,3 +1,5 @@
+const fs = require('fs');
+const https = require('https');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -542,6 +544,30 @@ app.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
 
+app.use((req, res, next) => {
+    if (req.secure) {
+        return next();
+    }
+    res.redirect(`https://${req.headers.host}${req.url}`);
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
+});
+
+const keyPath = '/etc/letsencrypt/live/codequest.ddns.net/privkey.pem';
+const certPath = '/etc/letsencrypt/live/codequest.ddns.net/fullchain.pem';
+
+const privateKey = fs.readFileSync(keyPath, 'utf8');
+const certificate = fs.readFileSync(certPath, 'utf8');
+
+const credentials = { key: privateKey, cert: certificate };
+
+// Servidor HTTPS
+const httpsServer = https.createServer(credentials, app);
+
+const SSL_PORT = 443;
+
+httpsServer.listen(SSL_PORT, () => {
+    console.log(`Servidor HTTPS rodando na porta ${SSL_PORT}`);
 });
